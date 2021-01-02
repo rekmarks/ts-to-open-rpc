@@ -2,6 +2,9 @@
   "name": "ts-to-open-rpc",
   "version": "0.0.1",
   "main": "index.js",
+  "bin": {
+    "ts-to-open-rpc": "./index.js"
+  },
   "author": "Erik Marks <rekmarks@protonmail.com>",
   "license": "MIT",
   "private": false,
