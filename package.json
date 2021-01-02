@@ -1,12 +1,19 @@
 {
   "name": "ts-to-open-rpc",
   "version": "0.0.1",
-  "main": "index.js",
+  "description": "A command line utility for converting TypeScript interfaces to OpenRPC interface descriptions.",
   "bin": {
     "ts-to-open-rpc": "./index.js"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "author": "Erik Marks <rekmarks@protonmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rekmarks/ts-to-open-rpc.git"
+  },
   "private": false,
   "dependencies": {
     "@typescript-eslint/typescript-estree": "^4.11.1"

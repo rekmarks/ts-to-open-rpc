@@ -1,6 +1,6 @@
 # ts-to-open-rpc
 
-A CLI utility for converting TypeScript interfaces to OpenRPC interface descriptions.
+A command line utility for converting TypeScript interfaces to OpenRPC interface descriptions.
 
 _Note:_ Early MVP. Many TODOs.
 
