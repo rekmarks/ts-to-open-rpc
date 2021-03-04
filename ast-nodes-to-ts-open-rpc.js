@@ -1,4 +1,4 @@
-const { AST_NODE_TYPES } = require('@typescript-eslint/typescript-estree')
+const { AST_NODE_TYPES, ts } = require('@typescript-eslint/typescript-estree')
 
 const AST_NODES_TO_OPEN_RPC_TYPES = {
   [AST_NODE_TYPES.TSBooleanKeyword]: 'boolean',
@@ -95,7 +95,7 @@ const AST_NODES_TO_OPEN_RPC_TYPES = {
   // [AST_NODE_TYPES.TSEnumMember]: ts.EnumMember,
   // [AST_NODE_TYPES.TSExportAssignment]: ts.ExportAssignment,
   // [AST_NODE_TYPES.TSExternalModuleReference]: ts.ExternalModuleReference,
-  // [AST_NODE_TYPES.TSFunctionType]: ts.FunctionTypeNode,
+  [AST_NODE_TYPES.TSFunctionType]: 'method',
   // [AST_NODE_TYPES.TSImportEqualsDeclaration]: ts.ImportEqualsDeclaration,
   // [AST_NODE_TYPES.TSImportType]: ts.ImportTypeNode,
   // [AST_NODE_TYPES.TSIndexedAccessType]: ts.IndexedAccessTypeNode,
@@ -122,7 +122,7 @@ const AST_NODES_TO_OPEN_RPC_TYPES = {
   // [AST_NODE_TYPES.TSThisType]: ts.ThisTypeNode,
   // [AST_NODE_TYPES.TSTupleType]: ts.TupleTypeNode,
   // [AST_NODE_TYPES.TSTemplateLiteralType]: ts.TemplateLiteralTypeNode,
-  // [AST_NODE_TYPES.TSTypeAliasDeclaration]: ts.TypeAliasDeclaration,
+  [AST_NODE_TYPES.TSTypeAliasDeclaration]: "method",
   // [AST_NODE_TYPES.TSTypeAnnotation]: undefined,
   // [AST_NODE_TYPES.TSTypeAssertion]: ts.TypeAssertion,
   // [AST_NODE_TYPES.TSTypeLiteral]: ts.TypeLiteralNode,
