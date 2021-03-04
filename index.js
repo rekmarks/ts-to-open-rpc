@@ -38,25 +38,28 @@ if (body.length > 1) {
 }
 
 const [topNode] = body
-if (topNode.type !== AST_NODE_TYPES.TSInterfaceDeclaration) {
+if (topNode.type !== AST_NODE_TYPES.TSTypeAliasDeclaration) {
   throw new Error(
-    `Node is of type '${topNode.type}'. Only interfaces are supported.`
+    `Node is of type '${topNode.type}'. Only Type Declarations are supported.`
   )
 }
 
-if (topNode.body.type !== AST_NODE_TYPES.TSInterfaceBody) {
-  throw new Error(
-    `Unexpected interface declaration body type: ${topNode.body.type}`
-  )
-}
+// if (topNode.body.type !== AST_NODE_TYPES.TSInterfaceBody) {
+//   throw new Error(
+//     `Unexpected interface declaration body type: ${topNode.body.type}`
+//   )
+// }
 
 // Start conversion of AST to OpenRPC interface
+console.log(topNode);
 
 const { name: interfaceName } = topNode.id
 
 const intermediaryNodes = []
 const openRpcComponents = { schemas: {} }
 
+
+console.log("topNode", topNode);
 const tsInterface = topNode.body.body
 for (const tsNode of tsInterface) {
   if (tsNode.type !== AST_NODE_TYPES.TSPropertySignature) {
@@ -94,7 +97,7 @@ for (const tsNode of tsInterface) {
         const memberName = memberNode.key.name
         const memberOpenRpcType =
           AST_NODES_TO_OPEN_RPC_TYPES[
-            memberNode.typeAnnotation.typeAnnotation.type
+          memberNode.typeAnnotation.typeAnnotation.type
           ]
 
         if (!memberOpenRpcType) {
@@ -130,13 +133,21 @@ openRpcComponents.schemas[interfaceName] = getOpenRpcComponentObject(
 // Create final OpenRPC object
 
 const openRpc = {
-  name: methodName,
-  params: [
+  info: {
+    title: methodName,
+    version: "0.0.0-development"
+  },
+  methods: [
     {
-      name: interfaceName,
-      description: `The ${interfaceName}`,
-      schema: { [REF]: getComponentPathString(interfaceName) },
-    },
+      name: methodName,
+      params: [
+        {
+          name: interfaceName,
+          description: `The ${interfaceName}`,
+          schema: { [REF]: getComponentPathString(interfaceName) },
+        },
+      ],
+    }
   ],
   components: {
     // sort the component schemas alphabetically before adding them
